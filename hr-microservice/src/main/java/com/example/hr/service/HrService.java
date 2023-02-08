@@ -9,7 +9,6 @@ import com.example.hr.domain.Employee;
 import com.example.hr.domain.TcKimlikNo;
 import com.example.hr.dto.request.HireEmployeeRequest;
 import com.example.hr.dto.response.EmployeeResponse;
-import com.example.hr.dto.response.FireEmployeeResponse;
 import com.example.hr.dto.response.HireEmployeeResponse;
 
 @Service
@@ -29,9 +28,12 @@ public class HrService {
 		return new HireEmployeeResponse("success");
 	}
 
-	public FireEmployeeResponse fireEmployee(String identity) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public EmployeeResponse fireEmployee(String identity) {
+		return modelMapper.map(
+				hrApplication.fireEmployee(TcKimlikNo.valueOf(identity))
+				             .orElseThrow(() -> new IllegalArgumentException("cannnot find employee to fire")),
+			    EmployeeResponse.class);
 	}
 
 	public EmployeeResponse getEmployee(String identity) {

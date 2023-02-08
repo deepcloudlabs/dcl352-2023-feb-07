@@ -16,7 +16,6 @@ import com.example.hexgonal.Adapter;
 import com.example.hr.application.HrApplication;
 import com.example.hr.dto.request.HireEmployeeRequest;
 import com.example.hr.dto.response.EmployeeResponse;
-import com.example.hr.dto.response.FireEmployeeResponse;
 import com.example.hr.dto.response.HireEmployeeResponse;
 import com.example.hr.service.HrService;
 import com.example.validation.TcKimlikNo;
@@ -43,7 +42,7 @@ public class HrRestController {
 
 	// DELETE http://localhost:8100/hr/api/v1/employees/11111111110
 	@DeleteMapping("{identity}")
-	public FireEmployeeResponse fireEmployee(
+	public EmployeeResponse fireEmployee(
 			@PathVariable @TcKimlikNo String identity) {
 		return hrService.fireEmployee(identity);
 	}
